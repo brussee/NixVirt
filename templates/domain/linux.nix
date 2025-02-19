@@ -7,7 +7,7 @@ stuff@{ packages, ... }:
 , install_vol ? null
 , bridge_name ? "virbr0"
 , virtio_drive ? true
-, virtio_video ? true
+, virtio_video ? null
 , ...
 }:
 let

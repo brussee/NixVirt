@@ -28,8 +28,8 @@ let
       source = mksource storage_vol;
       backingStore = mkbackingstore backing_vol;
       target =
-        if virtio_drive
-        then { dev = "vda"; bus = "virtio"; }
+        if virtio_drive then
+          { dev = "vda"; bus = "virtio"; }
         else
           { dev = "sda"; bus = "sata"; };
     };
@@ -43,7 +43,7 @@ let
     , bridge_name ? "virbr0"
     , virtio_drive ? true
     , virtio_net ? false
-    , virtio_video ? true
+    , virtio_video ? null
     , ...
     }:
     {
@@ -76,7 +76,12 @@ let
       devices =
         {
           emulator = "${packages.qemu}/bin/qemu-system-x86_64";
-          disk = (if builtins.isNull storage_vol then [ ] else [ (mkstorage virtio_drive storage_vol backing_vol) ]) ++
+          disk = (
+            if builtins.isNull storage_vol then
+              [ ]
+            else
+              [ (mkstorage virtio_drive storage_vol backing_vol) ]
+          ) ++
             [
               {
                 type = mksourcetype install_vol;
@@ -94,7 +99,11 @@ let
           interface =
             {
               type = "bridge";
-              model = if virtio_net then { type = "virtio"; } else null;
+              model =
+                if virtio_net then
+                  { type = "virtio"; }
+                else
+                  null;
               source = { bridge = bridge_name; };
             };
           channel =
@@ -114,17 +123,32 @@ let
             {
               type = "spice";
               autoport = true;
-              listen = { type = "none"; };
+              listen =
+                if builtins.isNull virtio_video then
+                  { type = "address"; address = "127.0.0.1"; }
+                else if virtio_video then
+                  { type = "none"; }
+                else
+                  { type = "address"; address = "127.0.0.1"; };
               image = { compression = false; };
-              gl = { enable = virtio_video; };
+              gl =
+                if builtins.isNull virtio_video then
+                  null
+                else
+                  { enable = virtio_video; };
             };
           sound = { model = "ich9"; };
           audio = { id = 1; type = "spice"; };
           video =
             {
               model =
-                if virtio_video
-                then
+                if builtins.isNull virtio_video then
+                  {
+                    type = "virtio";
+                    heads = 1;
+                    primary = true;
+                  }
+                else if virtio_video then
                   {
                     type = "virtio";
                     heads = 1;
