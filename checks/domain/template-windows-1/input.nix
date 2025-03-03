@@ -7,5 +7,6 @@ lib: lib.domain.templates.windows
   backing_vol = /Storage/Base.qcow2;
   install_vol = /Source/Win11_23H2_EnglishInternational_x64v2.iso;
   nvram_path = /Storage/MyNVRAM.fd;
+  virtio_video = true;
   install_virtio = true;
 }

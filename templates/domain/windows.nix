@@ -13,7 +13,7 @@ stuff@{ packages, guest-install, ... }:
 , nvram_path
 , virtio_net ? false
 , virtio_drive ? false
-, virtio_video ? true
+, virtio_video ? null
 , install_virtio ? false
 , ...
 }:

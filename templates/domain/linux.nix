@@ -9,7 +9,7 @@ stuff@{ packages, ... }:
 , bridge_name ? "virbr0"
 , net_iface_mac ? null
 , virtio_drive ? true
-, virtio_video ? true
+, virtio_video ? null
 , ...
 }:
 let

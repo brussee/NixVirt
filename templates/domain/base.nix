@@ -48,7 +48,7 @@ let
     , net_iface_mac ? null
     , virtio_drive ? true
     , virtio_net ? false
-    , virtio_video ? true
+    , virtio_video ? null
     , ...
     }:
     {

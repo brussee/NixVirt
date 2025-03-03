@@ -6,5 +6,4 @@ lib: lib.domain.templates.linux
   memory = { count = 6; unit = "GiB"; };
   storage_vol = /Storage/MyHD.qcow2;
   backing_vol = /Storage/Base.qcow2;
-  virtio_video = null;
 }
