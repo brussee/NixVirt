@@ -16,7 +16,7 @@
   <clock offset='utc'>
     <timer name='rtc' tickpolicy='catchup'/>
     <timer name='pit' tickpolicy='delay'/>
-    <timer name='hpet' present='no'/>
+    <timer name='hpet' present='yes'/>
   </clock>
   <devices>
     <emulator>QEMU_PATH/bin/qemu-system-x86_64</emulator>

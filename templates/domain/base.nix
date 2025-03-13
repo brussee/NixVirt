@@ -75,7 +75,7 @@ let
             [
               { name = "rtc"; tickpolicy = "catchup"; }
               { name = "pit"; tickpolicy = "delay"; }
-              { name = "hpet"; present = false; }
+              { name = "hpet"; present = true; }
             ];
         };
       devices =
