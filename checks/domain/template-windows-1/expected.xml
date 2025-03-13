@@ -2,7 +2,7 @@
   <name>test-windows-1</name>
   <uuid>a8bdda9a-6c4a-49bf-bf2d-0dc9792e7b18</uuid>
   <memory unit='GiB'>10</memory>
-  <vcpu>2</vcpu>
+  <vcpu>4</vcpu>
   <os>
     <type arch='x86_64' machine='q35'>hvm</type>
     <loader readonly='yes' type='pflash'>OVMFFull_FD_PATH/FV/OVMF_CODE.ms.fd</loader>
@@ -31,7 +31,9 @@
       <ipi state='on'/>
     </hyperv>
   </features>
-  <cpu mode='host-passthrough'/>
+  <cpu mode='host-passthrough'>
+    <topology sockets='1' cores='4' threads='1'/>
+  </cpu>
   <clock offset='localtime'>
     <timer name='rtc' tickpolicy='catchup'/>
     <timer name='pit' tickpolicy='delay'/>

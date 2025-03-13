@@ -3,7 +3,7 @@
 stuff@{ packages, guest-install, ... }:
 { name
 , uuid
-, vcpu ? { count = 4; }
+, cores ? 4
 , memory ? { count = 4; unit = "GiB"; }
 , storage_vol ? null
 , backing_vol ? null
@@ -21,7 +21,7 @@ let
   basestuff = import ./base.nix stuff;
   base = basestuff.q35
     {
-      inherit name uuid vcpu memory storage_vol backing_vol install_vol bridge_name net_iface_mac virtio_net virtio_video;
+      inherit name uuid cores memory storage_vol backing_vol install_vol bridge_name net_iface_mac virtio_net virtio_video;
     };
 in
 base //

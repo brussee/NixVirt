@@ -18,11 +18,6 @@
       (elem "edited:edited" [ (attr "xmlns:edited" "https://wiki.gnome.org/Apps/Boxes/edited") ] "2024-01-25T22:39:41-0800")
     ];
   memory = { count = 4194304; unit = "KiB"; };
-  vcpu =
-    {
-      placement = "static";
-      count = 16;
-    };
   os =
     {
       type = "hvm";
@@ -67,7 +62,7 @@
         [
           { name = "rtc"; tickpolicy = "catchup"; }
           { name = "pit"; tickpolicy = "delay"; }
-          { name = "hpet"; present = false; }
+          { name = "hpet"; present = true; }
         ];
     };
   on_poweroff = "destroy";

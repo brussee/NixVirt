@@ -39,7 +39,7 @@ let
   base = machinetype: cdtarget:
     { name
     , uuid
-    , vcpu ? { count = 2; }
+    , cores ? 2
     , memory ? { count = 2; unit = "GiB"; }
     , storage_vol ? null
     , backing_vol ? null
@@ -53,7 +53,7 @@ let
     }:
     {
       type = "kvm";
-      inherit name uuid vcpu memory;
+      inherit name uuid memory;
 
       os =
         {
@@ -67,7 +67,17 @@ let
           acpi = { };
           apic = { };
         };
-      cpu = { mode = "host-passthrough"; };
+      cpu =
+        {
+          mode = "host-passthrough";
+          topology =
+            {
+              sockets = 1;
+              cores = cores;
+              threads = 1;
+            };
+        };
+      vcpu = { count = cores; };
       clock =
         {
           offset = "utc";
